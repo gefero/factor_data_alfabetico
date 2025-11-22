@@ -17,7 +17,8 @@ Aplicación web interactiva para ordenar alfabéticamente las líneas de textos 
 ## 📦 Instalación Local
 
 1. Clona o descarga este repositorio
-2. Instala las dependencias:
+2. Asegúrate de tener el archivo `logo.png` en el mismo directorio que `app.py`
+3. Instala las dependencias:
 ```bash
 pip install -r requirements.txt
 ```
@@ -33,7 +34,7 @@ La aplicación se abrirá automáticamente en tu navegador en `http://localhost:
 
 ### Opción 1: Deploy desde GitHub
 
-1. Sube los archivos (`app.py` y `requirements.txt`) a un repositorio de GitHub
+1. Sube los archivos (`app.py`, `requirements.txt` y `logo.png`) a un repositorio de GitHub
 
 2. Ve a [share.streamlit.io](https://share.streamlit.io)
 

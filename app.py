@@ -1,6 +1,7 @@
 import streamlit as st
 import unicodedata
 import re
+import requests
 
 # Configuración de la página
 st.set_page_config(
@@ -9,11 +10,16 @@ st.set_page_config(
     layout="wide"
 )
 
-# Título y descripción
-st.title("📖 Ordenador de Textos Poéticos")
+# Logo y título
+col1, col2 = st.columns([1, 4])
+with col1:
+    st.image("logo.png", width=150)
+with col2:
+    st.title("📖 Ordenador de Textos Poéticos")
+
 st.markdown("""
 Esta aplicación ordena alfabéticamente las líneas de textos poéticos.
-Puedes **subir un archivo** o **pegar el texto directamente**.
+Puedes **cargar desde URL**, **subir un archivo** o **pegar el texto directamente**.
 """)
 
 # Función para normalizar texto para ordenamiento
@@ -79,11 +85,80 @@ capitalizar = st.sidebar.checkbox("Capitalizar primera letra", value=True)
 eliminar_guiones = st.sidebar.checkbox("Eliminar guiones", value=True)
 
 # Tabs para diferentes métodos de entrada
-tab1, tab2 = st.tabs(["📁 Subir Archivo", "✍️ Pegar Texto"])
+tab1, tab2, tab3 = st.tabs(["🔗 Desde URL", "📁 Subir Archivo", "✍️ Pegar Texto"])
 
 texto_procesado = None
 
 with tab1:
+    st.subheader("Descarga desde un enlace")
+    st.markdown("Introduce la URL de un archivo .txt para procesarlo")
+    
+    url_input = st.text_input(
+        "URL del archivo",
+        placeholder="https://www.gutenberg.org/cache/epub/14765/pg14765.txt",
+        help="Ingresa la URL completa del archivo de texto"
+    )
+    
+    # Opciones avanzadas para textos desde URL
+    with st.expander("⚙️ Opciones avanzadas (opcional)"):
+        usar_delimitadores = st.checkbox(
+            "Usar delimitadores de inicio y fin",
+            value=False,
+            help="Extrae solo el texto entre dos frases específicas"
+        )
+        
+        if usar_delimitadores:
+            col1, col2 = st.columns(2)
+            with col1:
+                inicio_texto = st.text_input(
+                    "Texto de inicio",
+                    placeholder="Aquí me pongo a cantar",
+                    help="Frase donde comienza el texto a extraer"
+                )
+            with col2:
+                fin_texto = st.text_input(
+                    "Texto de fin",
+                    placeholder="Pero que naides conteste",
+                    help="Frase donde termina el texto a extraer"
+                )
+    
+    if url_input:
+        if st.button("🔄 Descargar y ordenar desde URL", key="btn_url"):
+            try:
+                with st.spinner("Descargando archivo desde la URL..."):
+                    # Descargar el texto desde la URL
+                    response = requests.get(url_input, timeout=30)
+                    response.raise_for_status()
+                    texto = response.text
+                    
+                    st.success(f"✅ Archivo descargado correctamente ({len(texto)} caracteres)")
+                    
+                    # Si se usan delimitadores, extraer solo esa parte
+                    if usar_delimitadores and inicio_texto and fin_texto:
+                        patron = re.escape(inicio_texto) + ".*" + re.escape(fin_texto)
+                        match = re.search(patron, texto, re.DOTALL)
+                        if match:
+                            texto = match.group(0)
+                            st.info(f"📝 Texto extraído entre delimitadores ({len(texto)} caracteres)")
+                        else:
+                            st.warning("⚠️ No se encontraron los delimitadores. Se procesará todo el texto.")
+                    
+                    # Mostrar preview del texto original
+                    with st.expander("👁️ Ver texto descargado"):
+                        preview = texto[:1000] + "..." if len(texto) > 1000 else texto
+                        st.text_area("Texto original (preview)", preview, height=200, disabled=True)
+                    
+                    # Procesar
+                    with st.spinner("Procesando texto..."):
+                        texto_procesado = procesar_texto(texto, filtrar_numeros, capitalizar, eliminar_guiones)
+                        
+            except requests.exceptions.RequestException as e:
+                st.error(f"❌ Error al descargar el archivo: {str(e)}")
+                st.info("Verifica que la URL sea correcta y que el servidor esté disponible.")
+            except Exception as e:
+                st.error(f"❌ Error al procesar el archivo: {str(e)}")
+
+with tab2:
     st.subheader("Sube tu archivo de texto")
     uploaded_file = st.file_uploader(
         "Selecciona un archivo .txt",
@@ -105,7 +180,7 @@ with tab1:
             with st.spinner("Procesando..."):
                 texto_procesado = procesar_texto(texto, filtrar_numeros, capitalizar, eliminar_guiones)
 
-with tab2:
+with tab3:
     st.subheader("Pega tu texto aquí")
     texto_input = st.text_area(
         "Escribe o pega tu texto poético",
@@ -162,9 +237,17 @@ if texto_procesado:
 
 # Footer
 st.markdown("---")
-st.markdown("""
-<div style='text-align: center'>
-    <p>💡 <strong>Tip:</strong> Esta herramienta ordena las líneas alfabéticamente, 
-    ignorando acentos y considerando mayúsculas/minúsculas según tus preferencias.</p>
-</div>
-""", unsafe_allow_html=True)
+col1, col2 = st.columns([3, 1])
+with col1:
+    st.markdown("""
+    <div style='text-align: center'>
+        <p>💡 <strong>Tip:</strong> Esta herramienta ordena las líneas alfabéticamente, 
+        ignorando acentos y considerando mayúsculas/minúsculas según tus preferencias.</p>
+    </div>
+    """, unsafe_allow_html=True)
+with col2:
+    st.markdown("""
+    <div style='text-align: center'>
+        <p><small>Desarrollado por<br><strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: inherit;">factor~data EIDAES_UNSAM</a></strong></small></p>
+    </div>
+    """, unsafe_allow_html=True)
