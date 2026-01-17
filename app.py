@@ -10,103 +10,109 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS personalizado con paleta de colores verde (#1fea00) y negro
+# CSS personalizado con paleta de colores verde suave y negro
 st.markdown("""
 <style>
-    /* Color de fondo principal */
+    /* Color de fondo principal - verde suave */
     .stApp {
-        background-color: #000000;
+        background-color: #2d5016;
     }
     
-    /* Texto principal */
+    /* Texto principal - negro */
     .stMarkdown, p, span, div {
-        color: #1fea00 !important;
+        color: #000000 !important;
     }
     
-    /* Títulos */
+    /* Títulos - negro */
     h1, h2, h3, h4, h5, h6 {
-        color: #1fea00 !important;
+        color: #000000 !important;
     }
     
-    /* Botones */
+    /* Botones - verde más oscuro con texto negro */
     .stButton > button {
-        background-color: #1fea00;
+        background-color: #4a7c2c;
         color: #000000;
-        border: 2px solid #1fea00;
+        border: 2px solid #3d6623;
         font-weight: bold;
     }
     
     .stButton > button:hover {
-        background-color: #19c900;
-        border-color: #19c900;
+        background-color: #5a8c3c;
+        border-color: #4a7c2c;
     }
     
-    /* Inputs y text areas */
+    /* Inputs y text areas - fondo verde claro */
     .stTextInput > div > div > input,
     .stTextArea > div > div > textarea {
-        background-color: #0a0a0a;
-        color: #1fea00;
-        border: 1px solid #1fea00;
+        background-color: #3d6623;
+        color: #000000;
+        border: 1px solid #2d5016;
     }
     
-    /* Tabs */
+    /* Tabs - tonos verdes */
     .stTabs [data-baseweb="tab-list"] {
-        background-color: #000000;
+        background-color: #2d5016;
     }
     
     .stTabs [data-baseweb="tab"] {
-        color: #1fea00;
-        background-color: #0a0a0a;
-        border: 1px solid #1fea00;
+        color: #000000;
+        background-color: #3d6623;
+        border: 1px solid #2d5016;
     }
     
     .stTabs [aria-selected="true"] {
-        background-color: #1fea00;
+        background-color: #4a7c2c;
         color: #000000;
     }
     
-    /* Sidebar */
+    /* Sidebar - verde oscuro */
     [data-testid="stSidebar"] {
-        background-color: #0a0a0a;
+        background-color: #1f3a10;
     }
     
     /* Cajas de información */
     .stAlert {
-        background-color: #0a0a0a;
-        border: 1px solid #1fea00;
-        color: #1fea00;
+        background-color: #3d6623;
+        border: 1px solid #2d5016;
+        color: #000000;
     }
     
     /* Expanders */
     .streamlit-expanderHeader {
-        background-color: #0a0a0a;
-        color: #1fea00 !important;
-        border: 1px solid #1fea00;
+        background-color: #3d6623;
+        color: #000000 !important;
+        border: 1px solid #2d5016;
     }
     
     /* Checkboxes */
     .stCheckbox label {
-        color: #1fea00 !important;
+        color: #000000 !important;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        background-color: #0a0a0a;
-        border: 1px solid #1fea00;
+        background-color: #3d6623;
+        border: 1px solid #2d5016;
     }
     
     /* Métricas */
     [data-testid="stMetricValue"] {
-        color: #1fea00 !important;
+        color: #000000 !important;
     }
     
-    /* Links */
+    /* Links - verde más oscuro */
     a {
-        color: #1fea00 !important;
+        color: #1f3a10 !important;
+        font-weight: bold;
     }
     
     a:hover {
-        color: #19c900 !important;
+        color: #2d5016 !important;
+    }
+    
+    /* Spinner y elementos de carga */
+    .stSpinner > div {
+        border-top-color: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -125,9 +131,11 @@ Esta app busca hacer replicable y escalable el procedimiento de Katchadjian. Ord
 Se puede **cargar desde URL**, **subir un archivo** o **pegar el texto directamente**.
 """)
 
-# Imagen del Martín Fierro ordenado (cuando esté disponible)
+# Imagen del Martín Fierro ordenado
 try:
-    st.image("mf_ordenado.jpg", caption="Martín Fierro ordenado alfabéticamente - Pablo Katchadjian", use_container_width=True)
+    col_img1, col_img2, col_img3 = st.columns([1, 1, 1])
+    with col_img2:
+        st.image("mf_ordenado.jpg", caption="Martín Fierro ordenado alfabéticamente - Pablo Katchadjian", use_container_width=True)
 except:
     pass  # Si no está la imagen, no rompe la app
 
@@ -197,14 +205,14 @@ eliminar_guiones = st.sidebar.checkbox("Eliminar guiones", value=True)
 st.sidebar.markdown("---")
 st.sidebar.markdown("""
 ### 👨‍💻 Desarrollador
-<a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #1fea00;">
+<a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #000000;">
     <strong>gefero.github.io</strong>
 </a>
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown("""
 ### 🏢 Institución
-<a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #1fea00;">
+<a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #000000;">
     <strong>factor~data EIDAES_UNSAM</strong>
 </a>
 """, unsafe_allow_html=True)
@@ -374,7 +382,7 @@ with col2:
     st.markdown("""
     <div style='text-align: center'>
         <p><small>Desarrollado por<br>
-        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #1fea00;">gefero</a></strong><br>
-        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #1fea00;">factor~data EIDAES_UNSAM</a></strong></small></p>
+        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #000000;">gefero</a></strong><br>
+        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #000000;">factor~data EIDAES_UNSAM</a></strong></small></p>
     </div>
     """, unsafe_allow_html=True)
