@@ -10,6 +10,107 @@ st.set_page_config(
     layout="wide"
 )
 
+# CSS personalizado con paleta de colores verde (#1fea00) y negro
+st.markdown("""
+<style>
+    /* Color de fondo principal */
+    .stApp {
+        background-color: #000000;
+    }
+    
+    /* Texto principal */
+    .stMarkdown, p, span, div {
+        color: #1fea00 !important;
+    }
+    
+    /* Títulos */
+    h1, h2, h3, h4, h5, h6 {
+        color: #1fea00 !important;
+    }
+    
+    /* Botones */
+    .stButton > button {
+        background-color: #1fea00;
+        color: #000000;
+        border: 2px solid #1fea00;
+        font-weight: bold;
+    }
+    
+    .stButton > button:hover {
+        background-color: #19c900;
+        border-color: #19c900;
+    }
+    
+    /* Inputs y text areas */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea {
+        background-color: #0a0a0a;
+        color: #1fea00;
+        border: 1px solid #1fea00;
+    }
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        background-color: #000000;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        color: #1fea00;
+        background-color: #0a0a0a;
+        border: 1px solid #1fea00;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #1fea00;
+        color: #000000;
+    }
+    
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #0a0a0a;
+    }
+    
+    /* Cajas de información */
+    .stAlert {
+        background-color: #0a0a0a;
+        border: 1px solid #1fea00;
+        color: #1fea00;
+    }
+    
+    /* Expanders */
+    .streamlit-expanderHeader {
+        background-color: #0a0a0a;
+        color: #1fea00 !important;
+        border: 1px solid #1fea00;
+    }
+    
+    /* Checkboxes */
+    .stCheckbox label {
+        color: #1fea00 !important;
+    }
+    
+    /* File uploader */
+    [data-testid="stFileUploader"] {
+        background-color: #0a0a0a;
+        border: 1px solid #1fea00;
+    }
+    
+    /* Métricas */
+    [data-testid="stMetricValue"] {
+        color: #1fea00 !important;
+    }
+    
+    /* Links */
+    a {
+        color: #1fea00 !important;
+    }
+    
+    a:hover {
+        color: #19c900 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Logo y título
 col1, col2 = st.columns([1, 4])
 with col1:
@@ -18,9 +119,17 @@ with col2:
     st.title("📖 Ordenador de Textos Poéticos")
 
 st.markdown("""
-Esta aplicación ordena alfabéticamente las líneas de textos poéticos.
-Puedes **cargar desde URL**, **subir un archivo** o **pegar el texto directamente**.
+Suele decirse (con mucha razón) que la vanguardia está muerta. Sin embargo, hay textos y autores que buscan dialogar con el fantasma de la vanguardia (como diría Tabarobsky). Uno de esos textos es el "Martín Fierro ordenado alfabéticamente" y uno de esos autores es Pablo Katchadjian: toma el Martín Fierro (la ida) y reescribirlo sin agregar nada: simplemente ordena de forma alfabética los versos y lo publica. El libro es pura forma. Pero no pura forma del lenguaje (que también lo es): es puro procedimiento, puro artefacto. Y como tal es reproducible. ¿Qué otros textos podríamos ordenar alfabéticamente? Toda la gauchesca, desde ya. La poesía épica, dada su extensión, parece bastante adecuada.
+
+Esta app busca hacer replicable y escalable el procedimiento de Katchadjian. Ordena alfabéticamente las líneas de textos poéticos.
+Se puede **cargar desde URL**, **subir un archivo** o **pegar el texto directamente**.
 """)
+
+# Imagen del Martín Fierro ordenado (cuando esté disponible)
+try:
+    st.image("mf_ordenado.jpg", caption="Martín Fierro ordenado alfabéticamente - Pablo Katchadjian", use_container_width=True)
+except:
+    pass  # Si no está la imagen, no rompe la app
 
 # Función para normalizar texto para ordenamiento
 def normalize_for_sorting(s):
@@ -83,6 +192,22 @@ st.sidebar.header("⚙️ Opciones de Procesamiento")
 filtrar_numeros = st.sidebar.checkbox("Filtrar números y numeración romana", value=True)
 capitalizar = st.sidebar.checkbox("Capitalizar primera letra", value=True)
 eliminar_guiones = st.sidebar.checkbox("Eliminar guiones", value=True)
+
+# Información adicional en sidebar
+st.sidebar.markdown("---")
+st.sidebar.markdown("""
+### 👨‍💻 Desarrollador
+<a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #1fea00;">
+    <strong>gefero.github.io</strong>
+</a>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown("""
+### 🏢 Institución
+<a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #1fea00;">
+    <strong>factor~data EIDAES_UNSAM</strong>
+</a>
+""", unsafe_allow_html=True)
 
 # Tabs para diferentes métodos de entrada
 tab1, tab2, tab3 = st.tabs(["🔗 Desde URL", "📁 Subir Archivo", "✍️ Pegar Texto"])
@@ -237,7 +362,7 @@ if texto_procesado:
 
 # Footer
 st.markdown("---")
-col1, col2 = st.columns([3, 1])
+col1, col2 = st.columns([2, 1])
 with col1:
     st.markdown("""
     <div style='text-align: center'>
@@ -248,6 +373,8 @@ with col1:
 with col2:
     st.markdown("""
     <div style='text-align: center'>
-        <p><small>Desarrollado por<br><strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: inherit;">factor~data EIDAES_UNSAM</a></strong></small></p>
+        <p><small>Desarrollado por<br>
+        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #1fea00;">gefero</a></strong><br>
+        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #1fea00;">factor~data EIDAES_UNSAM</a></strong></small></p>
     </div>
     """, unsafe_allow_html=True)
