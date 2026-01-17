@@ -10,109 +10,134 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS personalizado con paleta de colores verde suave y negro
+# CSS personalizado con paleta de colores rojo vivo y blanco
 st.markdown("""
 <style>
-    /* Color de fondo principal - verde suave */
+    /* Color de fondo principal - rojo vivo */
     .stApp {
-        background-color: #2d5016;
+        background-color: #e63946;
     }
     
-    /* Texto principal - negro */
+    /* Texto principal - blanco */
     .stMarkdown, p, span, div {
-        color: #000000 !important;
+        color: #ffffff !important;
     }
     
-    /* Títulos - negro */
+    /* Títulos - blanco */
     h1, h2, h3, h4, h5, h6 {
-        color: #000000 !important;
+        color: #ffffff !important;
+        font-weight: bold;
     }
     
-    /* Botones - verde más oscuro con texto negro */
+    /* Botones - rojo más oscuro con texto blanco */
     .stButton > button {
-        background-color: #4a7c2c;
-        color: #000000;
-        border: 2px solid #3d6623;
+        background-color: #c1121f;
+        color: #ffffff;
+        border: 2px solid #780000;
         font-weight: bold;
     }
     
     .stButton > button:hover {
-        background-color: #5a8c3c;
-        border-color: #4a7c2c;
+        background-color: #a01320;
+        border-color: #780000;
     }
     
-    /* Inputs y text areas - fondo verde claro */
+    /* Inputs y text areas - fondo rojo más claro */
     .stTextInput > div > div > input,
     .stTextArea > div > div > textarea {
-        background-color: #3d6623;
+        background-color: #f4978e;
         color: #000000;
-        border: 1px solid #2d5016;
+        border: 2px solid #c1121f;
+        font-weight: 500;
     }
     
-    /* Tabs - tonos verdes */
+    /* Tabs - tonos rojos */
     .stTabs [data-baseweb="tab-list"] {
-        background-color: #2d5016;
+        background-color: #e63946;
     }
     
     .stTabs [data-baseweb="tab"] {
-        color: #000000;
-        background-color: #3d6623;
-        border: 1px solid #2d5016;
+        color: #ffffff;
+        background-color: #c1121f;
+        border: 2px solid #780000;
+        font-weight: bold;
     }
     
     .stTabs [aria-selected="true"] {
-        background-color: #4a7c2c;
-        color: #000000;
+        background-color: #ffffff;
+        color: #e63946;
+        border: 2px solid #780000;
     }
     
-    /* Sidebar - verde oscuro */
+    /* Sidebar - rojo más oscuro */
     [data-testid="stSidebar"] {
-        background-color: #1f3a10;
+        background-color: #c1121f;
     }
     
     /* Cajas de información */
     .stAlert {
-        background-color: #3d6623;
-        border: 1px solid #2d5016;
+        background-color: #f4978e;
+        border: 2px solid #780000;
         color: #000000;
     }
     
     /* Expanders */
     .streamlit-expanderHeader {
-        background-color: #3d6623;
-        color: #000000 !important;
-        border: 1px solid #2d5016;
+        background-color: #c1121f;
+        color: #ffffff !important;
+        border: 2px solid #780000;
     }
     
     /* Checkboxes */
     .stCheckbox label {
-        color: #000000 !important;
+        color: #ffffff !important;
+        font-weight: bold;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        background-color: #3d6623;
-        border: 1px solid #2d5016;
+        background-color: #f4978e;
+        border: 2px solid #780000;
     }
     
     /* Métricas */
     [data-testid="stMetricValue"] {
-        color: #000000 !important;
-    }
-    
-    /* Links - verde más oscuro */
-    a {
-        color: #1f3a10 !important;
+        color: #ffffff !important;
         font-weight: bold;
     }
     
+    /* Links - blanco */
+    a {
+        color: #ffffff !important;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    
     a:hover {
-        color: #2d5016 !important;
+        color: #f4978e !important;
     }
     
     /* Spinner y elementos de carga */
     .stSpinner > div {
-        border-top-color: #000000 !important;
+        border-top-color: #ffffff !important;
+    }
+    
+    /* Success/Info boxes */
+    .stSuccess {
+        background-color: #f4978e;
+        color: #000000;
+    }
+    
+    /* Download button */
+    .stDownloadButton > button {
+        background-color: #780000;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        font-weight: bold;
+    }
+    
+    .stDownloadButton > button:hover {
+        background-color: #a01320;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -205,14 +230,14 @@ eliminar_guiones = st.sidebar.checkbox("Eliminar guiones", value=True)
 st.sidebar.markdown("---")
 st.sidebar.markdown("""
 ### 👨‍💻 Desarrollador
-<a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #000000;">
+<a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #ffffff;">
     <strong>gefero.github.io</strong>
 </a>
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown("""
 ### 🏢 Institución
-<a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #000000;">
+<a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #ffffff;">
     <strong>factor~data EIDAES_UNSAM</strong>
 </a>
 """, unsafe_allow_html=True)
@@ -382,7 +407,7 @@ with col2:
     st.markdown("""
     <div style='text-align: center'>
         <p><small>Desarrollado por<br>
-        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #000000;">gefero</a></strong><br>
-        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #000000;">factor~data EIDAES_UNSAM</a></strong></small></p>
+        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #ffffff;">gefero</a></strong><br>
+        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #ffffff;">factor~data EIDAES_UNSAM</a></strong></small></p>
     </div>
     """, unsafe_allow_html=True)
