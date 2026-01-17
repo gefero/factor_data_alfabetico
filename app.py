@@ -10,134 +10,139 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS personalizado con paleta de colores rojo vivo y blanco
+# CSS personalizado con paleta inspirada en "Martín Fierro ordenado alfabéticamente"
 st.markdown("""
 <style>
-    /* Color de fondo principal - rojo vivo */
+    /* Color de fondo principal - verde vibrante como la portada */
     .stApp {
-        background-color: #e63946;
+        background-color: #4caf50;
     }
     
-    /* Texto principal - blanco */
+    /* Texto principal - negro */
     .stMarkdown, p, span, div {
-        color: #ffffff !important;
+        color: #000000 !important;
     }
     
-    /* Títulos - blanco */
+    /* Títulos - negro bold */
     h1, h2, h3, h4, h5, h6 {
-        color: #ffffff !important;
+        color: #000000 !important;
         font-weight: bold;
     }
     
-    /* Botones - rojo más oscuro con texto blanco */
+    /* Botones - verde más oscuro con texto negro */
     .stButton > button {
-        background-color: #c1121f;
-        color: #ffffff;
-        border: 2px solid #780000;
+        background-color: #2e7d32;
+        color: #000000;
+        border: 2px solid #1b5e20;
         font-weight: bold;
     }
     
     .stButton > button:hover {
-        background-color: #a01320;
-        border-color: #780000;
+        background-color: #388e3c;
+        border-color: #2e7d32;
     }
     
-    /* Inputs y text areas - fondo rojo más claro */
+    /* Inputs y text areas - verde claro */
     .stTextInput > div > div > input,
     .stTextArea > div > div > textarea {
-        background-color: #f4978e;
+        background-color: #81c784;
         color: #000000;
-        border: 2px solid #c1121f;
+        border: 2px solid #2e7d32;
         font-weight: 500;
     }
     
-    /* Tabs - tonos rojos */
+    /* Tabs - tonos verdes */
     .stTabs [data-baseweb="tab-list"] {
-        background-color: #e63946;
+        background-color: #4caf50;
     }
     
     .stTabs [data-baseweb="tab"] {
-        color: #ffffff;
-        background-color: #c1121f;
-        border: 2px solid #780000;
+        color: #000000;
+        background-color: #66bb6a;
+        border: 2px solid #2e7d32;
         font-weight: bold;
     }
     
     .stTabs [aria-selected="true"] {
-        background-color: #ffffff;
-        color: #e63946;
-        border: 2px solid #780000;
+        background-color: #2e7d32;
+        color: #ffffff;
+        border: 2px solid #1b5e20;
     }
     
-    /* Sidebar - rojo más oscuro */
+    /* Sidebar - verde más oscuro */
     [data-testid="stSidebar"] {
-        background-color: #c1121f;
+        background-color: #2e7d32;
     }
     
     /* Cajas de información */
     .stAlert {
-        background-color: #f4978e;
-        border: 2px solid #780000;
+        background-color: #81c784;
+        border: 2px solid #2e7d32;
         color: #000000;
     }
     
     /* Expanders */
     .streamlit-expanderHeader {
-        background-color: #c1121f;
-        color: #ffffff !important;
-        border: 2px solid #780000;
+        background-color: #66bb6a;
+        color: #000000 !important;
+        border: 2px solid #2e7d32;
     }
     
     /* Checkboxes */
     .stCheckbox label {
-        color: #ffffff !important;
+        color: #000000 !important;
         font-weight: bold;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        background-color: #f4978e;
-        border: 2px solid #780000;
+        background-color: #81c784;
+        border: 2px solid #2e7d32;
     }
     
     /* Métricas */
     [data-testid="stMetricValue"] {
-        color: #ffffff !important;
+        color: #000000 !important;
         font-weight: bold;
     }
     
-    /* Links - blanco */
+    /* Links - negro bold */
     a {
-        color: #ffffff !important;
+        color: #000000 !important;
         font-weight: bold;
         text-decoration: underline;
     }
     
     a:hover {
-        color: #f4978e !important;
+        color: #1b5e20 !important;
     }
     
     /* Spinner y elementos de carga */
     .stSpinner > div {
-        border-top-color: #ffffff !important;
+        border-top-color: #000000 !important;
     }
     
     /* Success/Info boxes */
     .stSuccess {
-        background-color: #f4978e;
+        background-color: #81c784;
         color: #000000;
     }
     
     /* Download button */
     .stDownloadButton > button {
-        background-color: #780000;
+        background-color: #1b5e20;
         color: #ffffff;
-        border: 2px solid #ffffff;
+        border: 2px solid #000000;
         font-weight: bold;
     }
     
     .stDownloadButton > button:hover {
-        background-color: #a01320;
+        background-color: #2e7d32;
+    }
+    
+    /* Texto en sidebar */
+    [data-testid="stSidebar"] * {
+        color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -407,7 +412,7 @@ with col2:
     st.markdown("""
     <div style='text-align: center'>
         <p><small>Desarrollado por<br>
-        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #ffffff;">gefero</a></strong><br>
-        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #ffffff;">factor~data EIDAES_UNSAM</a></strong></small></p>
+        <strong><a href="https://gefero.github.io/" target="_blank" style="text-decoration: none; color: #000000;">gefero</a></strong><br>
+        <strong><a href="https://factor-data.netlify.app/" target="_blank" style="text-decoration: none; color: #000000;">factor~data EIDAES_UNSAM</a></strong></small></p>
     </div>
     """, unsafe_allow_html=True)
